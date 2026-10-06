@@ -1143,11 +1143,13 @@ impl From<SequenceCollection> for PySequenceCollection {
 /// Variants:
 ///     Raw: Store sequences as raw bytes (1 byte per base).
 ///     Encoded: Store sequences with 2-bit encoding (4 bases per byte).
+///     Zstd: Store each sequence as a zstd-compressed frame.
 #[pyclass(name = "StorageMode", module = "gtars.refget")]
 #[derive(Clone)]
 pub enum PyStorageMode {
     Raw,
     Encoded,
+    Zstd,
 }
 
 impl From<StorageMode> for PyStorageMode {
@@ -1155,6 +1157,7 @@ impl From<StorageMode> for PyStorageMode {
         match mode {
             StorageMode::Raw => PyStorageMode::Raw,
             StorageMode::Encoded => PyStorageMode::Encoded,
+            StorageMode::Zstd => PyStorageMode::Zstd,
         }
     }
 }
@@ -1164,6 +1167,7 @@ impl From<PyStorageMode> for StorageMode {
         match mode {
             PyStorageMode::Raw => StorageMode::Raw,
             PyStorageMode::Encoded => StorageMode::Encoded,
+            PyStorageMode::Zstd => StorageMode::Zstd,
         }
     }
 }

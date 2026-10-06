@@ -387,10 +387,12 @@ class StorageMode(Enum):
     Variants:
         Raw: Store sequences as raw bytes (1 byte per base).
         Encoded: Store sequences with 2-bit encoding (4 bases per byte).
+        Zstd: Store each sequence as a zstd-compressed frame.
     """
 
     Raw: int
     Encoded: int
+    Zstd: int
 
 class FhrMetadata:
     """FAIR Headers Reference genome metadata for a sequence collection.
